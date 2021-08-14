@@ -7,6 +7,18 @@ use super::components::*;
 const WIN_WIDTH: f32 = 560.0;
 const WIN_HEIGHT: f32 = 560.0;
 
+// Initialize entities
+pub struct SetupPlugin;
+
+impl Plugin for SetupPlugin {
+    fn build(&self, app: &mut AppBuilder) {
+        app
+            .insert_resource(Scoreboard { score: 0 })
+            .add_startup_system(setup.system())
+            .add_state(AppState::InGame);
+    }
+}
+
 pub fn setup(
     mut commands: Commands,
     mut materials: ResMut<Assets<ColorMaterial>>,
